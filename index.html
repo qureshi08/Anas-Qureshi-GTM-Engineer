@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Anas Qureshi — Tech Consultant · AI Automations · Web Apps</title>
   <meta name="description"
-    content="Anas Qureshi — AI Automation Consultant & Full-Stack Developer. I build custom AI workflows and internal tools for forward-thinking businesses to stop manual grunt work.">
+    content="Anas Qureshi — Tech Consultant. I build AI automations and custom apps that replace manual work. The systems I built for PepsiCo and a national bank, now for growing businesses.">
   <link rel="icon" href="profile.png">
   <link
     href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;600;700&family=Patrick+Hand&family=Space+Mono:wght@400;700&display=swap"
@@ -282,68 +282,6 @@
       color: var(--paper);
     }
 
-    /* Floating stat chips */
-    .hero-stats {
-      position: absolute;
-      right: 80px;
-      top: 50%;
-      transform: translateY(-50%);
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      animation: fadeLeft 0.7s 0.4s ease both;
-    }
-
-    .stat-chip {
-      background: rgba(255, 253, 245, 0.05);
-      border: 1.5px solid rgba(255, 253, 245, 0.12);
-      border-radius: 10px;
-      padding: 18px 24px;
-      min-width: 180px;
-      position: relative;
-    }
-
-    .stat-chip::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 0;
-      bottom: 0;
-      width: 3px;
-      border-radius: 10px 0 0 10px;
-    }
-
-    .stat-chip.brick::before {
-      background: var(--brick);
-    }
-
-    .stat-chip.forest::before {
-      background: var(--forest);
-    }
-
-    .stat-chip.amber::before {
-      background: var(--amber);
-    }
-
-    .stat-num {
-      font-family: var(--font-display);
-      font-weight: 700;
-      font-size: 38px;
-      color: var(--paper);
-      line-height: 1;
-      display: block;
-    }
-
-    .stat-label {
-      font-family: var(--font-mono);
-      font-size: 9px;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: rgba(255, 253, 245, 0.4);
-      display: block;
-      margin-top: 4px;
-    }
-
     /* ─── SECTION COMMON ─── */
     section {
       padding: 32px 80px;
@@ -517,6 +455,131 @@
       background: var(--amber-light);
       color: #7a5800;
       border-color: var(--amber);
+    }
+
+    /* ─── NICHE CARDS (For X Business) ─── */
+    .niche-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      margin-top: 24px;
+    }
+
+    .niche-card {
+      background: var(--paper);
+      border: 2.5px solid var(--ink);
+      border-radius: 10px;
+      box-shadow: var(--shadow);
+      padding: 24px;
+      transition: transform 0.15s, box-shadow 0.15s;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .niche-card:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 6px 6px 0 var(--ink);
+    }
+
+    .niche-card.brick {
+      border-color: var(--brick);
+      box-shadow: var(--shadow-b);
+    }
+
+    .niche-card.brick:hover {
+      box-shadow: 6px 6px 0 var(--brick);
+    }
+
+    .niche-card.forest {
+      border-color: var(--forest);
+      box-shadow: var(--shadow-f);
+    }
+
+    .niche-card.forest:hover {
+      box-shadow: 6px 6px 0 var(--forest);
+    }
+
+    .niche-card.amber {
+      border-color: var(--amber);
+      box-shadow: 4px 4px 0 var(--amber);
+    }
+
+    .niche-card.amber:hover {
+      box-shadow: 6px 6px 0 var(--amber);
+    }
+
+    .niche-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      flex-wrap: wrap;
+      padding-bottom: 12px;
+      border-bottom: 1.5px dashed rgba(26, 18, 5, 0.15);
+    }
+
+    .niche-industry {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink);
+      font-weight: 700;
+    }
+
+    .niche-proof-badge {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      background: var(--forest);
+      color: var(--paper);
+      padding: 3px 10px;
+      border-radius: 12px;
+      white-space: nowrap;
+    }
+
+    .niche-block {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .niche-label {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--brick);
+      font-weight: 700;
+    }
+
+    .niche-block p {
+      font-family: var(--font-body);
+      font-size: 15px;
+      line-height: 1.4;
+      color: var(--ink2);
+    }
+
+    .niche-block p em {
+      color: var(--forest);
+      font-style: italic;
+      font-weight: 600;
+    }
+
+    .niche-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: auto;
+      padding-top: 8px;
+    }
+
+    @media (max-width: 900px) {
+      .niche-grid {
+        grid-template-columns: 1fr;
+      }
     }
 
     /* ─── HOW IT WORKS ─── */
@@ -1313,10 +1376,6 @@
         padding: 80px 24px 48px;
       }
 
-      .hero-stats {
-        display: none;
-      }
-
       .hero-headline {
         font-size: clamp(40px, 10vw, 72px);
       }
@@ -1398,14 +1457,14 @@
 
   <!-- HERO -->
   <section id="hero">
-    <div class="hero-eyebrow">// Tech Consultant · AI Automations · Full-Stack Web Apps</div>
+    <div class="hero-eyebrow">// Tech Consultant · AI Automations · Custom Web Apps</div>
     <h1 class="hero-headline">
       Stop doing<br>work a<br><span class="accent">machine</span><br>should do.
     </h1>
     <div class="hero-rule"></div>
     <p class="hero-sub">
-      I build AI automations and custom internal tools for forward-thinking businesses — so your team stops doing admin
-      and starts doing the work that actually grows revenue.
+      I build AI automations and custom apps that delete manual work — the same systems I built for
+      PepsiCo and a national bank, now for growing businesses.
     </p>
     <div class="hero-actions">
       <a href="https://calendly.com/muhammadanasq/free-15-min-audit" target="_blank" class="btn-primary">Get a Free
@@ -1413,20 +1472,6 @@
       <a href="#work" class="btn-secondary">See the Work</a>
     </div>
 
-    <div class="hero-stats">
-      <div class="stat-chip brick">
-        <span class="stat-num">80m→40s</span>
-        <span class="stat-label">SKU Mapping · Retail Giant</span>
-      </div>
-      <div class="stat-chip forest">
-        <span class="stat-num">60%</span>
-        <span class="stat-label">Workload cut · Recruitment platform</span>
-      </div>
-      <div class="stat-chip amber">
-        <span class="stat-num">4→19%</span>
-        <span class="stat-label">Reply rate · Cold outreach</span>
-      </div>
-    </div>
   </section>
 
   <!-- WHAT I DO -->
@@ -1444,9 +1489,9 @@
         <p class="service-desc">Lead follow-up, CRM updates, report generation, invoice chasing — anything your team
           does manually more than twice a week. I map it, automate it, and hand it back running.</p>
         <div class="service-tags">
-          <span class="tag tag-brick">Make.com</span>
-          <span class="tag tag-brick">Zapier</span>
           <span class="tag tag-brick">n8n</span>
+          <span class="tag tag-brick">Python</span>
+          <span class="tag tag-brick">Gemini</span>
           <span class="tag tag-brick">OpenAI API</span>
         </div>
       </div>
@@ -1457,10 +1502,10 @@
         <p class="service-desc">Your team shouldn't be hacking spreadsheets into dashboards. I build lightweight
           internal apps — proposal generators, client portals, lead trackers — that actually fit how you work.</p>
         <div class="service-tags">
-          <span class="tag tag-forest">React</span>
+          <span class="tag tag-forest">Next.js</span>
           <span class="tag tag-forest">Node.js</span>
           <span class="tag tag-forest">Supabase</span>
-          <span class="tag tag-forest">Retool</span>
+          <span class="tag tag-forest">Python</span>
         </div>
       </div>
 
@@ -1479,64 +1524,166 @@
     </div>
   </section>
 
-  <!-- NICHES / WHO I HELP -->
+  <!-- NICHES / FOR X BUSINESS -->
   <section id="niches" class="texture-light reveal" style="background:var(--paper2);">
     <div class="section-badge">Who I Help</div>
-    <h2 class="section-headline">Niches I <span style="color:var(--forest);">optimise.</span></h2>
+    <h2 class="section-headline">If you're a <span style="color:var(--forest);">___,</span><br>here's where I'd start.</h2>
     <div class="section-rule" style="background:var(--forest);"></div>
-    <p class="section-sub">Automation isn't a "one size fits all" solution. I've mapped the biggest bottlenecks across
-      these ten industries.</p>
+    <p class="section-sub">Same playbook, different industry. Here's the first thing I'd build if you handed me the keys.</p>
 
-    <div class="services-grid" style="grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));">
-      <div class="service-card reveal" style="border-color:var(--ink3); background:var(--paper);">
-        <div class="service-title" style="font-size:20px;">Real Estate</div>
-        <p class="service-desc" style="font-size:16px;">Drowning in manual follow-ups, listings management, and CRM
-          updates.</p>
+    <div class="niche-grid">
+
+      <!-- 1. RECRUITMENT -->
+      <div class="niche-card brick reveal">
+        <div class="niche-head">
+          <span class="niche-industry">Recruitment / Staffing</span>
+          <span class="niche-proof-badge">Direct proof</span>
+        </div>
+        <div class="niche-block">
+          <span class="niche-label">The pain</span>
+          <p>Screening 200+ CVs a week by hand. Candidates ghosting because replies take days. Hiring managers chasing on WhatsApp.</p>
+        </div>
+        <div class="niche-block">
+          <span class="niche-label">What I'd build first</span>
+          <p>An AI-screening portal that ranks every CV against the role, auto-replies to every applicant within minutes, and pushes only the shortlist into a clean hiring-manager dashboard.</p>
+        </div>
+        <div class="niche-block">
+          <span class="niche-label">What changes</span>
+          <p>~60% less manual recruiter work. Candidates stop ghosting because they actually hear back. <em>I've already built exactly this — the same playbook works for any team.</em></p>
+        </div>
+        <div class="niche-tags">
+          <span class="tag tag-brick">Next.js</span>
+          <span class="tag tag-brick">Supabase</span>
+          <span class="tag tag-brick">Gemini</span>
+          <span class="tag tag-brick">n8n</span>
+        </div>
       </div>
-      <div class="service-card reveal" style="border-color:var(--ink3); background:var(--paper);">
-        <div class="service-title" style="font-size:20px;">Law Firms</div>
-        <p class="service-desc" style="font-size:16px;">Document-heavy workflows, repetitive drafting, and client intake
-          chaos.</p>
+
+      <!-- 2. E-COMMERCE -->
+      <div class="niche-card forest reveal">
+        <div class="niche-head">
+          <span class="niche-industry">E-commerce / DTC Brands</span>
+        </div>
+        <div class="niche-block">
+          <span class="niche-label">The pain</span>
+          <p>Ops team manually checking stock levels, emailing suppliers for POs, updating Shopify + Notion + Google Sheets every time anything changes. Customer service answering the same 10 questions 50 times a day.</p>
+        </div>
+        <div class="niche-block">
+          <span class="niche-label">What I'd build first</span>
+          <p>Low-stock auto-triggers a draft PO to the right supplier (you just approve). AI customer service handles Tier-1 questions and only escalates the weird ones to your team.</p>
+        </div>
+        <div class="niche-block">
+          <span class="niche-label">What changes</span>
+          <p>~18 hours/week back to ops. Stock-outs stop happening. Your CS team finally talks to customers who actually need a human.</p>
+        </div>
+        <div class="niche-tags">
+          <span class="tag tag-forest">n8n</span>
+          <span class="tag tag-forest">Shopify API</span>
+          <span class="tag tag-forest">OpenAI</span>
+          <span class="tag tag-forest">Notion API</span>
+        </div>
       </div>
-      <div class="service-card reveal" style="border-color:var(--ink3); background:var(--paper);">
-        <div class="service-title" style="font-size:20px;">Recruitment</div>
-        <p class="service-desc" style="font-size:16px;">Highly automatable CV screening and candidate outreach
-          sequences.</p>
+
+      <!-- 3. MARKETING AGENCIES -->
+      <div class="niche-card amber reveal">
+        <div class="niche-head">
+          <span class="niche-industry">Marketing Teams</span>
+        </div>
+        <div class="niche-block">
+          <span class="niche-label">The pain</span>
+          <p>Account managers spending 2 days a month manually pulling client reports from 6 different platforms. Same proposal template rebuilt from scratch every time.</p>
+        </div>
+        <div class="niche-block">
+          <span class="niche-label">What I'd build first</span>
+          <p>A reporting engine that pulls from every ad platform into a branded weekly client report (auto-sent). An AI brief generator that turns a 1-line input from the client into a full content brief.</p>
+        </div>
+        <div class="niche-block">
+          <span class="niche-label">What changes</span>
+          <p>Account managers get 40+ hours a month back. Reports go out on time, every time. Proposals go out the same day a lead replies — not 3 days later.</p>
+        </div>
+        <div class="niche-tags">
+          <span class="tag tag-amber">n8n</span>
+          <span class="tag tag-amber">OpenAI</span>
+          <span class="tag tag-amber">Looker</span>
+          <span class="tag tag-amber">HubSpot API</span>
+        </div>
       </div>
-      <div class="service-card reveal" style="border-color:var(--ink3); background:var(--paper);">
-        <div class="service-title" style="font-size:20px;">E-commerce</div>
-        <p class="service-desc" style="font-size:16px;">Ops automation that drives direct revenue and clear ROI impact.
-        </p>
+
+      <!-- 4. REAL ESTATE -->
+      <div class="niche-card brick reveal">
+        <div class="niche-head">
+          <span class="niche-industry">Real Estate / Brokerages</span>
+        </div>
+        <div class="niche-block">
+          <span class="niche-label">The pain</span>
+          <p>New leads ghosting because follow-up happens 2 days late. Listings updated manually across 4 portals. Agents drowning in WhatsApp coordination.</p>
+        </div>
+        <div class="niche-block">
+          <span class="niche-label">What I'd build first</span>
+          <p>A 3-touch auto-follow-up sequence (fires within 5 minutes of inquiry, personalized with the listing they viewed) + a single dashboard that pushes listing updates to every portal in one click.</p>
+        </div>
+        <div class="niche-block">
+          <span class="niche-label">What changes</span>
+          <p>Lead response time goes from 2 days to 2 minutes. Agents stop spending 2 hours a day on listing busywork. <em>The same automation patterns I've built for enterprise data operations.</em></p>
+        </div>
+        <div class="niche-tags">
+          <span class="tag tag-brick">Python</span>
+          <span class="tag tag-brick">n8n</span>
+          <span class="tag tag-brick">OpenAI</span>
+          <span class="tag tag-brick">Webhooks</span>
+        </div>
       </div>
-      <div class="service-card reveal" style="border-color:var(--ink3); background:var(--paper);">
-        <div class="service-title" style="font-size:20px;">Early-stage SaaS</div>
-        <p class="service-desc" style="font-size:16px;">Building internal tools fast so you can focus on core product
-          features.</p>
+
+      <!-- 5. LAW FIRMS -->
+      <div class="niche-card forest reveal">
+        <div class="niche-head">
+          <span class="niche-industry">Law Firms / Solo Practices</span>
+        </div>
+        <div class="niche-block">
+          <span class="niche-label">The pain</span>
+          <p>Paralegals spending half their week drafting the same 5 contract templates over and over. New client intake done in 8 back-and-forth emails. Document collection drags out for weeks.</p>
+        </div>
+        <div class="niche-block">
+          <span class="niche-label">What I'd build first</span>
+          <p>An AI-powered intake portal that walks new clients through the full questionnaire, collects every doc, and outputs a clean case file. A contract generator that takes intake data and produces the first draft in 30 seconds.</p>
+        </div>
+        <div class="niche-block">
+          <span class="niche-label">What changes</span>
+          <p>Intake goes from 2 weeks to 2 days. Paralegals do actual legal work instead of admin. Clients feel handled instead of chased.</p>
+        </div>
+        <div class="niche-tags">
+          <span class="tag tag-forest">Next.js</span>
+          <span class="tag tag-forest">Supabase</span>
+          <span class="tag tag-forest">OpenAI</span>
+          <span class="tag tag-forest">DocuSign API</span>
+        </div>
       </div>
-      <div class="service-card reveal" style="border-color:var(--ink3); background:var(--paper);">
-        <div class="service-title" style="font-size:20px;">Marketing Agencies</div>
-        <p class="service-desc" style="font-size:16px;">Repetitive client reporting and complex content workflows.</p>
+
+      <!-- 6. LOGISTICS & FREIGHT -->
+      <div class="niche-card amber reveal">
+        <div class="niche-head">
+          <span class="niche-industry">Logistics & Freight</span>
+        </div>
+        <div class="niche-block">
+          <span class="niche-label">The pain</span>
+          <p>Sales reps manually building quotes from 4 different carrier rate sheets. Tracking updates copy-pasted from carrier portals into emails. Invoicing done weekly by hand.</p>
+        </div>
+        <div class="niche-block">
+          <span class="niche-label">What I'd build first</span>
+          <p>A quote engine that pulls live carrier rates and returns a customer-ready quote in 30 seconds. Auto-tracking that emails customers milestone updates without anyone touching it. Invoice generator that runs the second a shipment marks delivered.</p>
+        </div>
+        <div class="niche-block">
+          <span class="niche-label">What changes</span>
+          <p>Quotes go from 2 hours to 2 minutes. Customers stop calling for status updates. Cash flow improves because invoicing actually happens on time.</p>
+        </div>
+        <div class="niche-tags">
+          <span class="tag tag-amber">Python</span>
+          <span class="tag tag-amber">n8n</span>
+          <span class="tag tag-amber">Carrier APIs</span>
+          <span class="tag tag-amber">QuickBooks API</span>
+        </div>
       </div>
-      <div class="service-card reveal" style="border-color:var(--ink3); background:var(--paper);">
-        <div class="service-title" style="font-size:20px;">Private Clinics</div>
-        <p class="service-desc" style="font-size:16px;">Appointments, patient communication, and manual admin overhead.
-        </p>
-      </div>
-      <div class="service-card reveal" style="border-color:var(--ink3); background:var(--paper);">
-        <div class="service-title" style="font-size:20px;">Logistics & Freight</div>
-        <p class="service-desc" style="font-size:16px;">Quote generation, shipment tracking, and automated invoicing.
-        </p>
-      </div>
-      <div class="service-card reveal" style="border-color:var(--ink3); background:var(--paper);">
-        <div class="service-title" style="font-size:20px;">Accounting</div>
-        <p class="service-desc" style="font-size:16px;">Repetitive data entry, client chasing, and document collection.
-        </p>
-      </div>
-      <div class="service-card reveal" style="border-color:var(--ink3); background:var(--paper);">
-        <div class="service-title" style="font-size:20px;">Construction</div>
-        <p class="service-desc" style="font-size:16px;">Job scheduling, subcontractor comms, and messy WhatsApp
-          operations.</p>
-      </div>
+
     </div>
   </section>
 
@@ -1579,30 +1726,29 @@
   <!-- WORK / CASE STUDIES -->
   <section id="work" class="texture-light">
     <div class="section-badge">Work</div>
-    <h2 class="section-headline">Real results.<br><span style="color:var(--brick);">Real agencies.</span></h2>
+    <h2 class="section-headline">Real results.<br><span style="color:var(--brick);">Real businesses.</span></h2>
     <div class="section-rule"></div>
-    <p class="section-sub">These aren't invented numbers. Here's what actually happened when we stopped doing things
-      manually.</p>
+    <p class="section-sub">Real systems, real numbers, names you know. Here's what changed when the manual work went
+      away.</p>
 
     <div class="cases-grid">
 
       <div class="case-card v1 reveal">
         <div class="case-header">
           <div class="case-header-z">
-            <div class="case-industry">Recruitment Agency · 12 People</div>
-            <div class="case-title">Automated Lead Follow-Up System</div>
+            <div class="case-industry">PepsiCo · UAE &amp; KSA</div>
+            <div class="case-title">A manual monthly report that now runs itself</div>
           </div>
         </div>
         <div class="case-body">
-          <div class="case-result">4% → 19%</div>
-          <span class="case-result-label">Email reply rate</span>
-          <p class="case-desc">Their team was manually following up with every lead — a 3-hour daily task. Built a
-            3-touch automated sequence in Make.com with personalisation tokens. Set it up in 15 mins. Still running 4
-            months later. Zero maintenance required.</p>
+          <div class="case-result">80m → 40s</div>
+          <span class="case-result-label">SKU mapping, per 100 SKUs</span>
+          <p class="case-desc">Monthly retail reporting for the Gulf markets was a manual marathon. I built one end-to-end pipeline — data ingested, SKUs auto-mapped, dashboards built, numbers validated, AI analysis delivered to the client. Accuracy went from 70% to 95%, and validation dropped from 3 days to 1.</p>
           <div style="margin-top:14px;display:flex;gap:8px;flex-wrap:wrap;">
-            <span class="tag tag-brick">Make.com</span>
-            <span class="tag tag-brick">Apollo.io</span>
-            <span class="tag tag-brick">Gmail API</span>
+            <span class="tag tag-brick">Python</span>
+            <span class="tag tag-brick">Gemini</span>
+            <span class="tag tag-brick">Tableau</span>
+            <span class="tag tag-brick">Docker</span>
           </div>
         </div>
       </div>
@@ -1610,18 +1756,18 @@
       <div class="case-card v2 reveal">
         <div class="case-header">
           <div class="case-header-z">
-            <div class="case-industry">Global Retail Giant</div>
-            <div class="case-title">SKU Mapping Automation</div>
+            <div class="case-industry">National Development Bank</div>
+            <div class="case-title">20+ credit-risk models, automated end to end</div>
           </div>
         </div>
         <div class="case-body">
-          <div class="case-result">80m → 40s</div>
-          <span class="case-result-label">Processing time per batch</span>
-          <p class="case-desc">Thousands of messy SKUs mapped across 13 retailers. Replaced an 80-minute manual matching slog with a Python + n8n engine powered by Gemini AI. Accuracy jumped from 70% to 95%.</p>
+          <div class="case-result">~75%</div>
+          <span class="case-result-label">Less manual effort</span>
+          <p class="case-desc">Credit-risk models (PD, LGD, EAD, ECL) were run by hand across a maze of linked Excel files. I rebuilt all 20+ in Python and SQL and centralized every input into one relational database — version conflicts gone, every decision traceable.</p>
           <div style="margin-top:14px;display:flex;gap:8px;flex-wrap:wrap;">
             <span class="tag tag-forest">Python</span>
-            <span class="tag tag-forest">n8n</span>
-            <span class="tag tag-forest">Gemini AI</span>
+            <span class="tag tag-forest">SQL</span>
+            <span class="tag tag-forest">Docker</span>
           </div>
         </div>
       </div>
@@ -1629,18 +1775,18 @@
       <div class="case-card v3 reveal">
         <div class="case-header">
           <div class="case-header-z">
-            <div class="case-industry">Recruitment Agency · 20+ People</div>
-            <div class="case-title">AI-Powered Recruitment Portal</div>
+            <div class="case-industry">Hiring · Internal Tools</div>
+            <div class="case-title">Three tools and a mess, collapsed into one platform</div>
           </div>
         </div>
         <div class="case-body">
-          <div class="case-result">60%</div>
-          <span class="case-result-label">Reduction in manual workload</span>
-          <p class="case-desc">Replaced a messy Notion/Email loop with a custom Next.js portal. Automated CV screening, role-based tracking, and interview scheduling. Entirely built and deployed in 3 weeks.</p>
+          <div class="case-result">−60%</div>
+          <span class="case-result-label">Coordination time</span>
+          <p class="case-desc">Hiring ran across Notion, Excel, and manual email with no source of truth. I built one role-based web app — candidate tracking, assessment scheduling, RBAC, resume uploads — plus an n8n + LLM layer for the repetitive follow-ups. Response time dropped about 2 days; shortlist consistency rose 35%.</p>
           <div style="margin-top:14px;display:flex;gap:8px;flex-wrap:wrap;">
             <span class="tag tag-ink">Next.js</span>
             <span class="tag tag-ink">Supabase</span>
-            <span class="tag tag-ink">Gemini API</span>
+            <span class="tag tag-ink">n8n</span>
           </div>
         </div>
       </div>
@@ -1648,20 +1794,19 @@
       <div class="case-card v4 reveal">
         <div class="case-header">
           <div class="case-header-z">
-            <div class="case-industry">E-commerce Brand · 15 People</div>
-            <div class="case-title">Order & Inventory Ops Automation</div>
+            <div class="case-industry">Bank of Jordan · Compliance</div>
+            <div class="case-title">Core banking, wired into ZATCA e-invoicing</div>
           </div>
         </div>
         <div class="case-body">
-          <div class="case-result">18hrs</div>
-          <span class="case-result-label">Saved per week in manual ops</span>
-          <p class="case-desc">Operations team was manually checking stock, sending supplier POs, and updating Notion.
-            Built an end-to-end automation: low stock triggers PO, PO approval flow, auto-update to all systems.
-            Entirely hands-free.</p>
+          <div class="case-result">Phase-2</div>
+          <span class="case-result-label">ZATCA e-invoicing compliance</span>
+          <p class="case-desc">Integrated the bank's core banking system with ZATCA Phase-2 e-invoicing for automated, regulation-compliant invoice clearance — and built compliance tooling for Odoo and Microsoft Dynamics 365. Invoice generation, validation, and submission, end to end.</p>
           <div style="margin-top:14px;display:flex;gap:8px;flex-wrap:wrap;">
-            <span class="tag tag-amber">Zapier</span>
-            <span class="tag tag-amber">Shopify API</span>
-            <span class="tag tag-amber">Notion API</span>
+            <span class="tag tag-amber">Core Banking</span>
+            <span class="tag tag-amber">ZATCA</span>
+            <span class="tag tag-amber">Odoo</span>
+            <span class="tag tag-amber">MS 365</span>
           </div>
         </div>
       </div>
@@ -1679,7 +1824,7 @@
       <div class="about-avatar-wrap reveal">
         <div class="about-avatar">
           <img src="profile.png" alt="Anas Qureshi" class="avatar-img">
-          <span class="avatar-initials">AQ</span>
+          <span class="avatar-initials" style="font-size: 0.9rem;">Anas</span>
           <div class="avatar-dot"></div>
         </div>
         <div class="about-badges" style="margin-top:16px;">
@@ -1690,31 +1835,28 @@
       </div>
 
       <div class="about-text reveal">
-        <p>I'm a <strong>Tech Consultant</strong> who specialises in AI automations and custom internal tools for
-          service-based businesses. Not theory — actual systems that run while your team sleeps.</p>
+        <p>I'm a <strong>Tech Consultant</strong> who turns manual operations into systems that run on their own.
+          Not theory — real automations and custom apps, already built for names like PepsiCo and a national bank.</p>
 
-        <p>I got into this because I watched agency owners burn hours every day on things a well-configured Make.com
-          scenario could handle. It bothered me. So I started fixing it for them.</p>
+        <p>A lot of my work has been <span class="highlight">enterprise-grade</span>: data pipelines, risk systems,
+          compliance integrations, internal platforms. Now I build that same caliber of system for growing
+          businesses — without the enterprise price tag or the six-month timeline.</p>
 
-        <p>I work with <span class="highlight">a wide range of businesses</span> globally — recruitment, real estate,
-          marketing, e-commerce, and more. If your team is spending too much time on manual tasks, you're probably a
-          fit.</p>
-
-        <p>I don't take on more than 3 clients at a time. I build fast, hand over properly, and don't disappear after
-          invoice.</p>
+        <p>If your team loses hours every week to work a machine should be doing, that's exactly what I fix. I build
+          fast, hand over properly, and don't disappear after the invoice.</p>
 
         <div class="skill-list">
           <div class="skill-item">
             <div class="skill-dot" style="background:var(--brick);"></div>
-            <span class="skill-name">Make.com / n8n</span>
+            <span class="skill-name">Python / SQL</span>
           </div>
           <div class="skill-item">
             <div class="skill-dot" style="background:var(--brick);"></div>
-            <span class="skill-name">OpenAI API</span>
+            <span class="skill-name">AI / LLMs · Gemini</span>
           </div>
           <div class="skill-item">
             <div class="skill-dot" style="background:var(--forest);"></div>
-            <span class="skill-name">React / Next.js</span>
+            <span class="skill-name">Next.js / React</span>
           </div>
           <div class="skill-item">
             <div class="skill-dot" style="background:var(--forest);"></div>
@@ -1722,11 +1864,11 @@
           </div>
           <div class="skill-item">
             <div class="skill-dot" style="background:var(--amber);"></div>
-            <span class="skill-name">Apollo / Instantly</span>
+            <span class="skill-name">n8n / Automation</span>
           </div>
           <div class="skill-item">
             <div class="skill-dot" style="background:var(--amber);"></div>
-            <span class="skill-name">HubSpot / Notion API</span>
+            <span class="skill-name">Tableau / Power BI</span>
           </div>
         </div>
       </div>
@@ -1770,7 +1912,7 @@
           <li>Ongoing improvements & fixes</li>
           <li>Priority response within 4 hrs</li>
           <li>Monthly review call</li>
-          <li>Ideal for: agencies scaling fast</li>
+          <li>Ideal for: growing businesses</li>
         </ul>
         <a href="https://calendly.com/muhammadanasq/free-15-min-audit" target="_blank" class="price-cta solid">Book
           Audit First →</a>
@@ -1801,7 +1943,7 @@
     <div class="section-badge">Contact</div>
     <h2 class="section-headline">Let's stop the<br>manual work.</h2>
     <div class="section-rule" style="background:rgba(255,253,245,0.6);"></div>
-    <p class="section-sub">Book a free 15-min audit. I'll tell you exactly what I'd automate for your agency — no pitch,
+    <p class="section-sub">Book a free 15-min audit. I'll tell you exactly what I'd automate for your business — no pitch,
       just an honest look.</p>
 
     <div class="contact-grid">
