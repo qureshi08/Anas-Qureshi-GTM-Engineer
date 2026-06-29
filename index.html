@@ -84,7 +84,13 @@
     #hero::after {
       content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: var(--brick);
     }
-    .hero-inner { position: relative; z-index: 1; max-width: 1100px; width: 100%; margin: 0 auto; }
+    .hero-inner { position: relative; z-index: 1; max-width: 1140px; width: 100%; margin: 0 auto;
+      display: flex; gap: 64px; align-items: center; flex-wrap: wrap; }
+    .hero-left { flex: 1 1 440px; }
+    .hero-right { flex: 1 1 420px; max-width: 540px; width: 100%; }
+    .hero-points { list-style: none; margin-top: 26px; display: flex; flex-direction: column; gap: 11px; }
+    .hero-points li { font-family: var(--font-body); font-size: 16px; color: rgba(255,253,245,0.82); display: flex; align-items: flex-start; gap: 11px; }
+    .hero-points li::before { content: '✓'; color: var(--forest-light); font-family: var(--font-mono); font-weight: 700; font-size: 14px; margin-top: 2px; }
     .hero-eyebrow {
       font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.18em;
       text-transform: uppercase; color: var(--brick-mid); margin-bottom: 20px;
@@ -116,7 +122,7 @@
       padding: 13px 16px; border: 2px solid var(--ink); border-radius: 8px;
       background: var(--paper); color: var(--ink); width: 100%; resize: vertical;
     }
-    .capture textarea { min-height: 84px; line-height: 1.4; }
+    .capture textarea { min-height: 122px; line-height: 1.4; }
     .capture input:focus, .capture textarea:focus { outline: none; border-color: var(--brick); box-shadow: 2px 2px 0 var(--brick); }
     .capture input::placeholder, .capture textarea::placeholder { color: var(--ink3); }
     .btn-submit {
@@ -242,16 +248,23 @@
   <!-- HERO + CAPTURE -->
   <section id="hero">
     <div class="hero-inner">
-      <div class="hero-eyebrow">// One free automation, no catch</div>
-      <h1 class="hero-headline">
-        Tell me one task you still do by hand. I'll automate it, <span class="accent">free.</span>
-      </h1>
-      <p class="hero-sub">
-        Pick one small, repetitive task you're sick of doing by hand. If it's a fit, I build a working automation for it
-        and hand it over, no charge. You see exactly how I work before you ever pay me a dollar.
-      </p>
+      <div class="hero-left">
+        <div class="hero-eyebrow">// One free automation, no catch</div>
+        <h1 class="hero-headline">
+          Tell me one task you still do by hand. I'll automate it, <span class="accent">free.</span>
+        </h1>
+        <p class="hero-sub">
+          Pick one small, repetitive task you're sick of doing by hand. If it's a fit, I build a working version and hand it over.
+        </p>
+        <ul class="hero-points">
+          <li>No call needed to start.</li>
+          <li>You keep it, running, either way.</li>
+          <li>You see exactly how I work before you pay a dollar.</li>
+        </ul>
+      </div>
 
-      <div class="capture">
+      <div class="hero-right">
+        <div class="capture">
         <form id="build-form" novalidate>
           <div class="capture-label">Show me the task</div>
           <div class="field-row">
@@ -269,36 +282,8 @@
           <h3>Got it.</h3>
           <p>I'll take a real look and get back to you within a couple of days, either with a plan to build it or an honest "here's a better fix."</p>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- EXAMPLES -->
-  <section id="get" class="block">
-    <div class="wrap">
-      <div class="section-badge">The kind of thing I mean</div>
-      <h2 class="section-headline">Three jobs nobody<br>should be doing by hand.</h2>
-      <div class="section-rule"></div>
-      <div class="get-grid">
-        <div class="get-card brick reveal">
-          <span class="get-icon">🔍</span>
-          <div class="get-title">Finding the leads</div>
-          <p class="get-desc">Someone spends hours hunting for the right companies and people, copying names off websites and directories one at a time.</p>
-        </div>
-        <div class="get-card forest reveal">
-          <span class="get-icon">🧩</span>
-          <div class="get-title">Leads with no context</div>
-          <p class="get-desc">A raw list with no verified email and nothing personal to say. So the outreach goes out generic, and generic gets ignored.</p>
-        </div>
-        <div class="get-card reveal">
-          <span class="get-icon">✉️</span>
-          <div class="get-title">Follow-ups from memory</div>
-          <p class="get-desc">Whether a lead gets a second or third touch comes down to a rep remembering. Most don't, and that's where the pipeline quietly leaks.</p>
         </div>
       </div>
-      <p class="get-footnote">
-        If a person on your team does it the same way more than twice a week, there's a good chance I can make it run on its own. <strong>Tell me which one, and I'll build it.</strong>
-      </p>
     </div>
   </section>
 
