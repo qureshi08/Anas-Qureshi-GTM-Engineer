@@ -1,6 +1,6 @@
 import { createClient } from '../../lib/supabase/server';
 import { createAdminClient } from '../../lib/supabase/admin';
-import { createCampaign, addLead, addProspect, updateProspect, seedFirstBatch } from './actions';
+import { createCampaign, addLead, addProspect, updateProspect } from './actions';
 import LogoutButton from '../components/LogoutButton';
 
 export const dynamic = 'force-dynamic';
@@ -49,11 +49,17 @@ export default async function AdminPage() {
         ))}
       </section>
 
-      {/* prospects */}
-      <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 26, color: 'var(--ink)', marginBottom: 12 }}>Prospects</h2>
+      {/* OUTBOUND */}
+      <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 30, color: 'var(--ink)', marginBottom: 2 }}>Outbound</h2>
+      <p className="mono" style={{ fontSize: 11, color: 'var(--ink3)', textTransform: 'uppercase', letterSpacing: '.1em', marginBottom: 16 }}>Source &middot; enrich &middot; reach &middot; track</p>
+
+      <section className="card" style={{ marginBottom: 16, borderStyle: 'dashed', boxShadow: 'none' }}>
+        <div className="tag">1 &middot; Source &nbsp;(next build)</div>
+        <p style={{ marginTop: 8, color: 'var(--ink2)' }}>You define a market and an industry here, and a scraper worker pulls businesses from Google Maps, their websites, and public directories straight into the pipeline below. Building this next. For now, add prospects by hand.</p>
+      </section>
 
       <section className="card" style={{ marginBottom: 16 }}>
-        <div className="tag">Add a prospect</div>
+        <div className="tag">2 &middot; Add a prospect</div>
         <form action={addProspect} style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginTop: 12, alignItems: 'flex-end' }}>
           <input name="company" placeholder="Company" required style={{ flex: '1 1 160px' }} />
           <input name="contact_name" placeholder="Contact name" style={{ flex: '1 1 140px' }} />
@@ -62,13 +68,6 @@ export default async function AdminPage() {
           <button className="btn" type="submit" style={{ fontSize: 16, padding: '9px 18px' }}>+ Add</button>
         </form>
       </section>
-
-      {ps.length === 0 && (
-        <form action={seedFirstBatch} style={{ marginBottom: 20 }}>
-          <button className="btn" type="submit">Import your first 20 agencies →</button>
-          <span className="mono" style={{ fontSize: 11, color: 'var(--ink3)', marginLeft: 12 }}>the boutique outbound agencies we shortlisted</span>
-        </form>
-      )}
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: 12, marginBottom: 32 }}>
         {ps.map(p => (
@@ -97,10 +96,11 @@ export default async function AdminPage() {
         ))}
       </div>
 
-      {/* inbound */}
+      {/* INBOUND */}
+      <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 30, color: 'var(--ink)', margin: '10px 0 14px' }}>Inbound</h2>
       <section className="card" style={{ marginBottom: 28 }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline' }}>
-          <div className="tag">Inbound · from your landing page</div>
+          <div className="tag">From your landing page</div>
           <span className="mono" style={{ fontSize: 11, color: 'var(--ink3)' }}>{(inbound || []).length}</span>
         </div>
         {(!inbound || inbound.length === 0) && <p style={{ color: 'var(--ink3)', marginTop: 10 }}>No inbound yet. Form submissions from your site show up here.</p>}
