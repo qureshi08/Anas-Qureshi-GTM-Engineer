@@ -33,3 +33,66 @@ export async function addLead(formData) {
   await admin.from('leads').insert({ campaign_id, first_name, email, company });
   revalidatePath('/admin');
 }
+
+// ── PROSPECTS (the pipeline) ────────────────────────────────
+export async function addProspect(formData) {
+  await requireUser();
+  const company = formData.get('company');
+  if (!company) return;
+  const admin = createAdminClient();
+  await admin.from('prospects').insert({
+    company,
+    contact_name: formData.get('contact_name') || null,
+    website: formData.get('website') || null,
+    niche: formData.get('niche') || null,
+    status: 'new',
+  });
+  revalidatePath('/admin');
+}
+
+export async function updateProspect(formData) {
+  await requireUser();
+  const id = formData.get('id');
+  if (!id) return;
+  const admin = createAdminClient();
+  await admin.from('prospects').update({
+    contact_name: formData.get('contact_name') || null,
+    linkedin: formData.get('linkedin') || null,
+    status: formData.get('status') || 'new',
+    notes: formData.get('notes') || null,
+  }).eq('id', id);
+  revalidatePath('/admin');
+}
+
+const FIRST_BATCH = [
+  { company: 'OutreachBloom', website: 'outreachbloom.com', niche: 'Done-for-you cold email, quality over volume' },
+  { company: 'OneAway', website: 'oneaway.io', niche: 'Deliverability-first email + LinkedIn' },
+  { company: 'Hypergen', website: 'hypergen.io', niche: 'Clay-powered, signal-based lead gen' },
+  { company: 'Beanstalk Consulting', website: 'beanstalkconsulting.co', niche: 'Books meetings for B2B SaaS' },
+  { company: 'NerdyJoe', website: 'nerdyjoe.com', niche: 'Human-written cold emails' },
+  { company: 'Growth Rhino', website: 'growthrhino.com', niche: 'Messaging / channel tests for startups' },
+  { company: 'ColdIQ', website: 'coldiq.com', niche: 'Intent-driven personalization' },
+  { company: 'SalesBread', website: 'salesbread.com', niche: 'Ultra-personalized LinkedIn + email', contact_name: 'Jack Reamer' },
+  { company: 'LevelUp Leads', website: 'levelupleads.io', niche: 'Targets technical / SaaS buyers' },
+  { company: 'Klean Leads', website: 'kleanleads.com', niche: 'Lead quality + verification' },
+  { company: 'Pipeful', website: 'pipeful.io', niche: 'Cold email for B2B SaaS' },
+  { company: 'Revboss', website: 'revboss.com', niche: 'Structured outreach + CRM backend' },
+  { company: 'Addlium', website: 'addlium.com', niche: 'Multilingual LinkedIn outreach (EU)' },
+  { company: 'CleverViral', website: 'cleverviral.com', niche: 'Cold email copywriting' },
+  { company: 'Leadium', website: 'leadium.com', niche: 'Omnichannel (email / phone / LinkedIn)' },
+  { company: 'Growth.cx', website: 'growth.cx', niche: 'B2B startup outbound' },
+  { company: 'Instream Group', website: 'instreamgroup.com', niche: 'Cold email across 40+ markets' },
+  { company: 'Leads Monky', website: 'leadsmonky.com', niche: 'Results-guarantee cold email' },
+  { company: 'IntentSignal', website: 'intentsignal.io', niche: 'Intent-based outreach' },
+  { company: 'Respona', website: 'respona.com', niche: 'Publisher / link-building outreach' },
+];
+
+export async function seedFirstBatch() {
+  await requireUser();
+  const admin = createAdminClient();
+  const { count } = await admin.from('prospects').select('id', { count: 'exact', head: true }).eq('source', 'first-batch-agencies');
+  if (count && count > 0) { revalidatePath('/admin'); return; }
+  const rows = FIRST_BATCH.map(p => ({ ...p, source: 'first-batch-agencies', status: 'new' }));
+  await admin.from('prospects').insert(rows);
+  revalidatePath('/admin');
+}

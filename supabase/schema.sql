@@ -1,10 +1,7 @@
 -- Run once in the Supabase SQL Editor (Project -> SQL Editor -> New query).
 -- This sets up the three tables the app uses.
 
--- The early landing form wrote to a table called `leads(email, task)`. Inbound
--- submissions now live in `inbound_leads`, and `leads` is reused for campaign
--- recipients. Drop the old table first (it only holds early test rows).
-drop table if exists leads cascade;
+-- Safe to re-run: every statement is create-if-not-exists.
 
 -- ── INBOUND (public landing form) ───────────────────────────────────
 create table if not exists inbound_leads (
@@ -51,6 +48,25 @@ create table if not exists leads (
 );
 alter table leads enable row level security;
 -- same as campaigns: service-role only, anon locked out.
+
+-- ── PROSPECTS (your outbound pipeline) ──────────────────────────────
+create table if not exists prospects (
+  id uuid primary key default gen_random_uuid(),
+  company text not null,
+  contact_name text,
+  role text,
+  website text,
+  linkedin text,
+  email text,
+  niche text,
+  source text,
+  status text default 'new',   -- new | connected | replied | call | won | lost
+  notes text,
+  created_at timestamptz default now(),
+  updated_at timestamptz default now()
+);
+alter table prospects enable row level security;
+-- service-role only (the admin), anon locked out.
 
 -- ── ADMIN USER ──────────────────────────────────────────────────────
 -- Create your login: Authentication -> Users -> Add user (email + password,
