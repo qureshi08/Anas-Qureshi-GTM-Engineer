@@ -81,6 +81,22 @@ export async function updateProspect(formData) {
   revalidatePath('/admin');
 }
 
+// Paste/CSV import — runs entirely on Vercel, no worker, no browser.
+export async function importProspects(formData) {
+  await requireUser();
+  const raw = (formData.get('list') || '').toString();
+  const rows = raw.split('\n').map(l => l.trim()).filter(Boolean).map(line => {
+    const parts = line.split(',').map(s => (s || '').trim());
+    const company = parts[0];
+    if (!company) return null;
+    return { company, website: parts[1] || null, niche: parts.slice(2).join(', ') || null, source: 'import', status: 'new' };
+  }).filter(Boolean);
+  if (!rows.length) return;
+  const admin = createAdminClient();
+  await admin.from('prospects').insert(rows);
+  revalidatePath('/admin');
+}
+
 const FIRST_BATCH = [
   { company: 'OutreachBloom', website: 'outreachbloom.com', niche: 'Done-for-you cold email, quality over volume' },
   { company: 'OneAway', website: 'oneaway.io', niche: 'Deliverability-first email + LinkedIn' },

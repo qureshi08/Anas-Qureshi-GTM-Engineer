@@ -1,6 +1,6 @@
 import { createClient } from '../../lib/supabase/server';
 import { createAdminClient } from '../../lib/supabase/admin';
-import { createCampaign, addLead, addProspect, updateProspect, createSourcingJob } from './actions';
+import { createCampaign, addLead, addProspect, updateProspect, importProspects } from './actions';
 import LogoutButton from '../components/LogoutButton';
 
 export const dynamic = 'force-dynamic';
@@ -14,7 +14,6 @@ export default async function AdminPage() {
 
   const admin = createAdminClient();
   const { data: prospects } = await admin.from('prospects').select('*').order('created_at', { ascending: false });
-  const { data: jobs } = await admin.from('sourcing_jobs').select('*').order('created_at', { ascending: false }).limit(20);
   const { data: inbound } = await admin.from('inbound_leads').select('*').order('created_at', { ascending: false }).limit(50);
   const { data: campaigns } = await admin.from('campaigns').select('*').order('created_at', { ascending: false });
   const { data: leads } = await admin.from('leads').select('campaign_id, status, sent_at');
@@ -56,24 +55,14 @@ export default async function AdminPage() {
 
       <section className="card" style={{ marginBottom: 16 }}>
         <div className="tag">1 &middot; Source</div>
-        <p style={{ margin: '8px 0 12px', color: 'var(--ink3)', fontSize: 14 }}>Define a market and an industry. Your worker scrapes Google Maps and the businesses' websites, then drops them into the pipeline below.</p>
-        <form action={createSourcingJob} style={{ display: 'flex', gap: 8, flexWrap: 'wrap', alignItems: 'flex-end' }}>
-          <input name="industry" placeholder="Industry (e.g. marketing agencies)" required style={{ flex: '1 1 220px' }} />
-          <input name="market" placeholder="Market (e.g. Austin, TX)" required style={{ flex: '1 1 160px' }} />
-          <button className="btn" type="submit">Source &rarr;</button>
+        <p style={{ margin: '8px 0 12px', color: 'var(--ink3)', fontSize: 14 }}>Paste businesses, one per line, as <span className="mono" style={{ fontSize: 12 }}>Company, Website, what they do</span>. They drop straight into the pipeline below.</p>
+        <form action={importProspects}>
+          <textarea name="list" required placeholder={"Acme Agency, acme.com, cold email for SaaS\nBright Leads, brightleads.io, appointment setting"} style={{ minHeight: 120, resize: 'vertical', fontFamily: 'var(--font-mono)', fontSize: 13 }} />
+          <button className="btn" type="submit" style={{ marginTop: 10 }}>Import &rarr;</button>
         </form>
-        {(jobs || []).length > 0 && (
-          <div style={{ marginTop: 14, display: 'flex', flexDirection: 'column', gap: 8 }}>
-            {(jobs || []).map(j => (
-              <div key={j.id} style={{ display: 'flex', justifyContent: 'space-between', gap: 8, fontSize: 14, borderBottom: '1px dashed rgba(26,18,5,0.15)', paddingBottom: 6 }}>
-                <span style={{ color: 'var(--ink2)' }}>{j.industry} &middot; {j.market}</span>
-                <span className="mono" style={{ fontSize: 11, textTransform: 'uppercase', color: j.status === 'done' ? 'var(--forest)' : j.status === 'error' ? 'var(--brick)' : 'var(--ink3)' }}>
-                  {j.status}{j.status === 'done' ? ` · ${j.found} found` : ''}
-                </span>
-              </div>
-            ))}
-          </div>
-        )}
+        <p className="mono" style={{ fontSize: 10, color: 'var(--ink3)', marginTop: 12, lineHeight: 1.6 }}>
+          Automated Google Maps sourcing plugs in right here once a Google Places API key is set. Runs fully on Vercel, no local anything.
+        </p>
       </section>
 
       <section className="card" style={{ marginBottom: 16 }}>
