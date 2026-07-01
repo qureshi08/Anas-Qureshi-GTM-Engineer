@@ -34,6 +34,23 @@ export async function addLead(formData) {
   revalidatePath('/admin');
 }
 
+// ── SOURCING (queue a job for the worker) ───────────────────
+export async function createSourcingJob(formData) {
+  await requireUser();
+  const market = formData.get('market');
+  const industry = formData.get('industry');
+  if (!market || !industry) return;
+  const admin = createAdminClient();
+  await admin.from('sourcing_jobs').insert({
+    market,
+    industry,
+    source: 'google_maps',
+    max_results: Number(formData.get('max_results')) || 40,
+    status: 'pending',
+  });
+  revalidatePath('/admin');
+}
+
 // ── PROSPECTS (the pipeline) ────────────────────────────────
 export async function addProspect(formData) {
   await requireUser();

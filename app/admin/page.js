@@ -1,6 +1,6 @@
 import { createClient } from '../../lib/supabase/server';
 import { createAdminClient } from '../../lib/supabase/admin';
-import { createCampaign, addLead, addProspect, updateProspect } from './actions';
+import { createCampaign, addLead, addProspect, updateProspect, createSourcingJob } from './actions';
 import LogoutButton from '../components/LogoutButton';
 
 export const dynamic = 'force-dynamic';
@@ -14,6 +14,7 @@ export default async function AdminPage() {
 
   const admin = createAdminClient();
   const { data: prospects } = await admin.from('prospects').select('*').order('created_at', { ascending: false });
+  const { data: jobs } = await admin.from('sourcing_jobs').select('*').order('created_at', { ascending: false }).limit(20);
   const { data: inbound } = await admin.from('inbound_leads').select('*').order('created_at', { ascending: false }).limit(50);
   const { data: campaigns } = await admin.from('campaigns').select('*').order('created_at', { ascending: false });
   const { data: leads } = await admin.from('leads').select('campaign_id, status, sent_at');
@@ -53,9 +54,26 @@ export default async function AdminPage() {
       <h2 style={{ fontFamily: 'var(--font-display)', fontSize: 30, color: 'var(--ink)', marginBottom: 2 }}>Outbound</h2>
       <p className="mono" style={{ fontSize: 11, color: 'var(--ink3)', textTransform: 'uppercase', letterSpacing: '.1em', marginBottom: 16 }}>Source &middot; enrich &middot; reach &middot; track</p>
 
-      <section className="card" style={{ marginBottom: 16, borderStyle: 'dashed', boxShadow: 'none' }}>
-        <div className="tag">1 &middot; Source &nbsp;(next build)</div>
-        <p style={{ marginTop: 8, color: 'var(--ink2)' }}>You define a market and an industry here, and a scraper worker pulls businesses from Google Maps, their websites, and public directories straight into the pipeline below. Building this next. For now, add prospects by hand.</p>
+      <section className="card" style={{ marginBottom: 16 }}>
+        <div className="tag">1 &middot; Source</div>
+        <p style={{ margin: '8px 0 12px', color: 'var(--ink3)', fontSize: 14 }}>Define a market and an industry. Your worker scrapes Google Maps and the businesses' websites, then drops them into the pipeline below.</p>
+        <form action={createSourcingJob} style={{ display: 'flex', gap: 8, flexWrap: 'wrap', alignItems: 'flex-end' }}>
+          <input name="industry" placeholder="Industry (e.g. marketing agencies)" required style={{ flex: '1 1 220px' }} />
+          <input name="market" placeholder="Market (e.g. Austin, TX)" required style={{ flex: '1 1 160px' }} />
+          <button className="btn" type="submit">Source &rarr;</button>
+        </form>
+        {(jobs || []).length > 0 && (
+          <div style={{ marginTop: 14, display: 'flex', flexDirection: 'column', gap: 8 }}>
+            {(jobs || []).map(j => (
+              <div key={j.id} style={{ display: 'flex', justifyContent: 'space-between', gap: 8, fontSize: 14, borderBottom: '1px dashed rgba(26,18,5,0.15)', paddingBottom: 6 }}>
+                <span style={{ color: 'var(--ink2)' }}>{j.industry} &middot; {j.market}</span>
+                <span className="mono" style={{ fontSize: 11, textTransform: 'uppercase', color: j.status === 'done' ? 'var(--forest)' : j.status === 'error' ? 'var(--brick)' : 'var(--ink3)' }}>
+                  {j.status}{j.status === 'done' ? ` · ${j.found} found` : ''}
+                </span>
+              </div>
+            ))}
+          </div>
+        )}
       </section>
 
       <section className="card" style={{ marginBottom: 16 }}>

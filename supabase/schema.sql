@@ -68,6 +68,26 @@ create table if not exists prospects (
 alter table prospects enable row level security;
 -- service-role only (the admin), anon locked out.
 
+-- phone + address (Google Maps provide these)
+alter table prospects add column if not exists phone text;
+alter table prospects add column if not exists address text;
+
+-- ── SOURCING JOBS (outbound: the app queues, the worker fulfills) ────
+create table if not exists sourcing_jobs (
+  id bigint generated always as identity primary key,
+  market text not null,
+  industry text not null,
+  source text default 'google_maps',
+  max_results int default 40,
+  status text default 'pending',   -- pending | running | done | error
+  found int default 0,
+  error text,
+  created_at timestamptz default now(),
+  updated_at timestamptz default now()
+);
+alter table sourcing_jobs enable row level security;
+-- service-role only (the app + the worker), anon locked out.
+
 -- ── ADMIN USER ──────────────────────────────────────────────────────
 -- Create your login: Authentication -> Users -> Add user (email + password,
 -- tick "Auto Confirm User"). That account is the only thing that can reach /admin.
